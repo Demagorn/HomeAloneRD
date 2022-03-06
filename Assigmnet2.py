@@ -9,23 +9,17 @@ This function should random n times values for A, B and C and evaluate the formu
 import random as r
 
 
-def test_value():
-    yield r.randint(-100,100)
-
-
 def formula_validation(formula, n=100):
-    variables = ["A","B","C"]
-    for _ in range(n):
-        for v in variables:
-            print(formula)
-            formula = formula.replace(v, str(next(test_value())))
-        print(formula)
-        result = eval(formula)
-
-        print(formula + "=" + str(result))
+    variables = ["A", "B", "C"]
+    for v in variables:
+        formula = formula.replace(v, "{}")
+        for i in range(n):
+            f2 = formula.format(r.randint(-100, 100), r.randint(-100, 100), r.randint(-100, 100))
+            result = eval(f2)
+            print(f2 + "=" + str(result))
 
 
-formula_validation(formula="2*A+B",n=2)
+formula_validation(formula="2*A+B", n=2)
 # Output (possible):
 # 2*3+5 = 11
 # 2*12+49 = 73
